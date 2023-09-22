@@ -33,8 +33,7 @@ public class PostController {
     @PostMapping("/post")
     public ResponseEntity<?> writePost(@RequestBody PostWriteDTO postWriteDTO){
         Post post = new Post();
-        post.setTitle(postWriteDTO.getTitle());
-        post.setContent(postWriteDTO.getContent());
+        post.updatePost(postWriteDTO.getTitle(), postWriteDTO.getContent());
         postService.save(post);
         return ResponseEntity.ok().body(post.getId());
     }
@@ -48,8 +47,7 @@ public class PostController {
     @PutMapping("/post/{id}")
     public ResponseEntity<?> editPost(@RequestBody PostEditDTO postEditDTO, @PathVariable Long id){
         Post post = postService.findPostDetail(id);
-        post.setTitle(postEditDTO.getTitle());
-        post.setContent(postEditDTO.getContent());
+        post.updatePost(postEditDTO.getTitle(), postEditDTO.getContent());
         postService.save(post);
         return ResponseEntity.ok().body(id);
     }
