@@ -1,9 +1,6 @@
 package com.itsweb.backend.member;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,11 +14,14 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String userId;
+
+    @Column(unique = true)
     private String username;
     private String password;
 
-    public void signUpMember(String userId,String username, String password) {
+    public void signUp(String userId,String username, String password) {
         this.userId = userId;
         this.password = password;
         this.username = username;

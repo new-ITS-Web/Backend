@@ -19,7 +19,7 @@ public class MemberController {
     public ResponseEntity<?> join(@ModelAttribute MemberDTO memberDTO) {
         log.info("memberDTO={}", memberDTO);
         Member member = new Member();
-        member.signUpMember(memberDTO.getUserId(),memberDTO.getUsername(), memberDTO.getPassword());
+        member.signUp(memberDTO.getUserId(),memberDTO.getUsername(), memberDTO.getPassword());
         memberService.save(member);
         return new ResponseEntity<>("회원가입 성공", HttpStatus.OK);
     }
