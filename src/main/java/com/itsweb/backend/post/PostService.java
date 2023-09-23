@@ -1,14 +1,14 @@
-package com.itsweb.backend.service;
+package com.itsweb.backend.post;
 
-import com.itsweb.backend.domian.Post;
-import com.itsweb.backend.repository.PostRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -16,8 +16,8 @@ import java.util.Optional;
 public class PostService {
     private final PostRepository postRepository;
 
-    public List<Post> findAllPost(){
-        List<Post> all = postRepository.findAll();
+    public Page<Post> findAllPost(Pageable pageable){
+        Page<Post> all = postRepository.findAll(pageable);
         return all;
     }
 

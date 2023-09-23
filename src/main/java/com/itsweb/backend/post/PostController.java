@@ -1,14 +1,13 @@
-package com.itsweb.backend.controller;
+package com.itsweb.backend.post;
 
-import com.itsweb.backend.domian.Post;
-import com.itsweb.backend.domian.PostEditDTO;
-import com.itsweb.backend.domian.PostWriteDTO;
-import com.itsweb.backend.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 
@@ -19,9 +18,9 @@ public class PostController {
     private final PostService postService;
     //게시글 전체조회
     @GetMapping("/post")
-    public List<Post> getAllPost(){
-        List<Post> list = postService.findAllPost();
-        return list;
+    public Page<Post> getAllPost(Pageable pageable){
+        Page<Post> posts = postService.findAllPost(pageable);
+        return posts;
     }
     //게시글 상세조회
     @GetMapping("/post/{id}")
@@ -31,9 +30,9 @@ public class PostController {
     }
 //    //게시글 작성
     @PostMapping("/post")
-    public ResponseEntity<?> writePost(@RequestBody PostWriteDTO postWriteDTO){
+    public ResponseEntity<?> writePost(@Validated @RequestBody PostWriteDTO postWriteDTO){
         Post post = new Post();
-        post.updatePost(postWriteDTO.getTitle(), postWriteDTO.getContent());
+        post.writePost(postWriteDTO);
         postService.save(post);
         return ResponseEntity.ok().body(post.getId());
     }
@@ -45,9 +44,9 @@ public class PostController {
     }
 //    //게시글 수정
     @PutMapping("/post/{id}")
-    public ResponseEntity<?> editPost(@RequestBody PostEditDTO postEditDTO, @PathVariable Long id){
+    public ResponseEntity<?> editPost(@Validated @RequestBody PostEditDTO postEditDTO, @PathVariable Long id){
         Post post = postService.findPostDetail(id);
-        post.updatePost(postEditDTO.getTitle(), postEditDTO.getContent());
+        post.updatePost(postEditDTO);
         postService.save(post);
         return ResponseEntity.ok().body(id);
     }
