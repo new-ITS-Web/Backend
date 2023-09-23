@@ -1,14 +1,10 @@
-package com.itsweb.backend.service;
+package com.itsweb.backend.post;
 
-import com.itsweb.backend.domian.Post;
-import com.itsweb.backend.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @Slf4j

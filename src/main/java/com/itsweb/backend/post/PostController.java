@@ -1,9 +1,5 @@
-package com.itsweb.backend.controller;
+package com.itsweb.backend.post;
 
-import com.itsweb.backend.domian.Post;
-import com.itsweb.backend.domian.PostEditDTO;
-import com.itsweb.backend.domian.PostWriteDTO;
-import com.itsweb.backend.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

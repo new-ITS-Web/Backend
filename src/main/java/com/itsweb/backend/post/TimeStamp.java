@@ -1,4 +1,4 @@
-package com.itsweb.backend.domian;
+package com.itsweb.backend.post;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;

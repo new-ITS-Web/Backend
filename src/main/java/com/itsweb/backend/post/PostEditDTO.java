@@ -1,4 +1,4 @@
-package com.itsweb.backend.domian;
+package com.itsweb.backend.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
