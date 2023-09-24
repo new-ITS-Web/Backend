@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +14,11 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
+    private final PostValidationService postValidationService;
     //게시글 전체조회
     @GetMapping("/post")
     public Page<Post> getAllPost(Pageable pageable){
@@ -30,7 +33,11 @@ public class PostController {
     }
 //    //게시글 작성
     @PostMapping("/post")
-    public ResponseEntity<?> writePost(@Validated @RequestBody PostWriteDTO postWriteDTO){
+    public ResponseEntity<?> writePost(@Validated @RequestBody PostWriteDTO postWriteDTO,BindingResult bindingResult){
+        String validationErrors = postValidationService.getValidationErrors(bindingResult);
+        if(validationErrors!=null){
+            return ResponseEntity.badRequest().body(validationErrors);
+        }
         Post post = new Post();
         post.writePost(postWriteDTO);
         postService.save(post);
