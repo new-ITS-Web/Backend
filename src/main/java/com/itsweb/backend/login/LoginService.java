@@ -15,7 +15,12 @@ public class LoginService {
     private final MemberRepository memberRepository;
 
     public Member loginCheck(String userId, String password) {
-        return memberRepository.findByUserId(userId);
+        Member findMember = memberRepository.findByUserId(userId);
 
+        //로그인 실패
+        if (findMember == null || !findMember.getPassword().equals(password)) {
+            return null;
+        }
+        return findMember;
     }
 }
