@@ -1,15 +1,11 @@
-package com.itsweb.backend.domian;
+package com.itsweb.backend.post;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,11 +16,17 @@ public class Post extends TimeStamp{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String content;
 
-    public void updatePost(String title, String content){
-        this.title = title;
-        this.content = content;
+    public void writePost(PostWriteDTO postWriteDTO){
+        this.title = postWriteDTO.getTitle();
+        this.content = postWriteDTO.getContent();
+    }
+    public void updatePost(PostEditDTO postEditDTO){
+        this.title = postEditDTO.getTitle();
+        this.content = postEditDTO.getContent();
     }
 }
