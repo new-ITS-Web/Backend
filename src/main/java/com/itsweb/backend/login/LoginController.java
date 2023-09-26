@@ -8,13 +8,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,22 +20,22 @@ import java.util.Map;
 @Slf4j
 public class LoginController {
 
-    private final ValidationErrorHandler errorHandler;
+    private final ValidationErrorHandler validationErrorHandler;
     private final LoginService loginService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@ModelAttribute LoginDTO loginDTO, HttpServletRequest request, BindingResult bindingResult) {
+    public ResponseEntity<?> login(@Validated @RequestBody LoginDTO loginDTO, HttpServletRequest request, BindingResult bindingResult) {
         String userId = loginDTO.getUserId();
         String password = loginDTO.getPassword();
         Member loginMember = loginService.loginCheck(userId, password);
 
         if (bindingResult.hasErrors()) {
-            Map<String, String> errorMap = errorHandler.errorHandler(bindingResult);
+            Map<String, String> errorMap = validationErrorHandler.handleError(bindingResult);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMap);
         }
 
         if (loginMember == null) {
-            return ResponseEntity.badRequest().body("아이디 또는 비밀번호 오류입니다.");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("아이디 또는 비밀번호 오류입니다.");
         }
 
         HttpSession session = request.getSession();
