@@ -11,11 +11,11 @@ import org.antlr.v4.runtime.misc.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostEditDTO{
-    @NotEmpty(message = "제목은 비어있을 수 없습니다.")
-    @Size(max = 20, message = "제목은 20자 이하여야 합니다.")
+    @NotEmpty
+    @Size(min = 1,max = 20, message = "제목은 1자 이상 20자 이하여야 합니다.")
     private String title;
 
-    @NotEmpty(message = "내용은 비어있을 수 없습니다.")
-    @Size(max = 1000, message = "내용은 1000자 이하여야 합니다.")
+    @NotEmpty
+    @Size(min=1, max = 1000, message = "내용은 1자 이상 1000자 이하여야 합니다.")
     private String content;
 }
