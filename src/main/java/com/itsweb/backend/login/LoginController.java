@@ -4,12 +4,12 @@ import com.itsweb.backend.ValidationErrorHandler;
 import com.itsweb.backend.member.Member;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -24,16 +24,13 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Validated @RequestBody LoginDTO loginDTO, HttpServletRequest request, BindingResult bindingResult) {
-        String userId = loginDTO.getUserId();
-        String password = loginDTO.getPassword();
-        Member loginMember = loginService.loginCheck(userId, password);
-
+    public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginDTO, HttpServletRequest request, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errorMap = validationErrorHandler.handleError(bindingResult);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMap);
         }
 
+        Member loginMember = loginService.loginCheck(loginDTO.getUserId(),loginDTO.getPassword());
         if (loginMember == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("아이디 또는 비밀번호 오류입니다.");
         }
