@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+
 @Entity
 @Getter
 @AllArgsConstructor
@@ -18,6 +21,9 @@ public class Post extends TimeStamp{
     private String title;
     @Column(nullable = false)
     private String content;
+
+    @OneToMany
+    private List<Image> images;
 
     public void writePost(PostWriteDTO postWriteDTO){
         this.title = postWriteDTO.getTitle();
