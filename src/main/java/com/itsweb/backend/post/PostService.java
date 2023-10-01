@@ -14,8 +14,8 @@ import java.util.NoSuchElementException;
 public class PostService {
     private final PostRepository postRepository;
 
-    public Page<Post> findAllPost(Pageable pageable){
-        Page<Post> all = postRepository.findAll(pageable);
+    public List<Post> findAllPost(){
+        List<Post> all = postRepository.findAll();
         return all;
     }
 
