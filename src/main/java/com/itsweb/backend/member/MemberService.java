@@ -14,12 +14,8 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    public boolean checkUserIdDuplicated(String userId) {
-        return memberRepository.existsByUserId(userId);
-    }
-
-    public boolean checkUsernameDuplicated(String username) {
-        return memberRepository.existsByUserId(username);
+    public boolean isDuplicated(Member member) {
+        return memberRepository.existsByUsername(member.getUsername()) || memberRepository.existsByUserId(member.getUserId());
     }
 
 

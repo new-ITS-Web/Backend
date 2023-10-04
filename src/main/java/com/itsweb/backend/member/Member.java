@@ -19,6 +19,7 @@ public class Member {
 
     @Column(unique = true)
     private String username;
+
     private String password;
 
     public void signUp(String userId,String username, String password) {
