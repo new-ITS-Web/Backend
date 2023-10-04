@@ -1,6 +1,5 @@
-package com.itsweb.backend.login;
+package com.itsweb.backend.member;
 
-import com.itsweb.backend.member.Member;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -15,11 +14,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Slf4j
 public class LoginController {
-    private final LoginService loginService;
+    private final MemberService memberService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginDTO, HttpServletRequest request) {
-        Member loginMember = loginService.loginCheck(loginDTO.getUserId(),loginDTO.getPassword());
+        Member loginMember = memberService.loginCheck(loginDTO.getUserId(),loginDTO.getPassword());
         if (loginMember == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("아이디 또는 비밀번호 오류입니다.");
         }
