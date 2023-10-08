@@ -18,18 +18,18 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginDTO, HttpServletRequest request) {
-        Member loginMember = memberService.loginCheck(loginDTO.getUserId(),loginDTO.getPassword());
+        Member loginMember = memberService.loginCheck(loginDTO.getUserId(), loginDTO.getPassword());
         if (loginMember == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("아이디 또는 비밀번호 오류입니다.");
         }
+        MemberVO memberVO = new MemberVO(loginMember.getUserId(), loginMember.getUsername());
 
         HttpSession session = request.getSession();
-        session.setAttribute("loginMember", loginMember);
-
+        session.setAttribute("loginMember", memberVO);
         return ResponseEntity.ok().body("로그인");
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public ResponseEntity<?> logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
@@ -38,4 +38,13 @@ public class LoginController {
         return ResponseEntity.ok().body("로그아웃");
 
     }
+
+    @GetMapping("/mypage")
+    public ResponseEntity<String> myPage(@SessionAttribute(name = "loginMember", required = false) MemberVO loginMember) {
+        if (loginMember == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("로그인이 필요합니다");
+        }
+        return ResponseEntity.ok().body(loginMember.getUserId());
+    }
+
 }
