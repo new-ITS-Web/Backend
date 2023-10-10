@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 /** AuditingEntityListener를 적용하면
  *엔티티가 데이터베이스에 추가되거나 변경될때 자동으로
  * 시간값을 지정할 수 있음.
-*/
+ */
 @Getter
 public class TimeStamp {
     // 등록일
