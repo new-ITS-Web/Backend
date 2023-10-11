@@ -1,4 +1,4 @@
-package com.itsweb.backend.post.like;
+package com.itsweb.backend.post.domain;
 
 import com.itsweb.backend.member.Member;
 import com.itsweb.backend.post.domain.Post;

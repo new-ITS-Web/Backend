@@ -1,17 +1,14 @@
 package com.itsweb.backend.post.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.itsweb.backend.post.dto.PostEditDTO;
 import com.itsweb.backend.post.dto.PostWriteDTO;
 import com.itsweb.backend.member.Member;
 import com.itsweb.backend.post.TimeStamp;
 import com.itsweb.backend.post.image.Image;
-import com.itsweb.backend.post.like.LikeEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.util.ArrayList;
 import java.util.List;
