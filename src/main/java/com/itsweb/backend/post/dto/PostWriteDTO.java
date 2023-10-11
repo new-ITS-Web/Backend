@@ -18,4 +18,7 @@ public class PostWriteDTO{
     @NotEmpty(message = "내용은 비면 안됩니다.")
     @Size(max = 1000, message = "내용은 1000자 이하여야 합니다.")
     private String content;
+
+    @NotEmpty(message = "작성자는 비면 안됩니다.")
+    private String writer;
 }

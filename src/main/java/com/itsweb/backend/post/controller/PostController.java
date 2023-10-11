@@ -1,11 +1,10 @@
 package com.itsweb.backend.post.controller;
 
+import com.itsweb.backend.member.Member;
+import com.itsweb.backend.member.MemberService;
 import com.itsweb.backend.post.domain.Post;
-import com.itsweb.backend.post.dto.PostEditDTO;
-import com.itsweb.backend.post.dto.PostLikeDTO;
-import com.itsweb.backend.post.dto.PostResponseDTO;
+import com.itsweb.backend.post.dto.*;
 import com.itsweb.backend.post.service.PostService;
-import com.itsweb.backend.post.dto.PostWriteDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,9 +22,10 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
+    private final MemberService memberService;
     //게시글 전체조회
     @GetMapping("/post")
-    public List<PostResponseDTO> getAllPost(){
+    public List<PostAllResponseDTO> getAllPost(){
         return postService.findAllPost();
 
     }
@@ -38,7 +38,8 @@ public class PostController {
     @PostMapping("/post")
     public ResponseEntity<?> writePost(@Valid @RequestBody PostWriteDTO postWriteDTO){
         Post post = new Post();
-        post.writePost(postWriteDTO);
+        Member member = memberService.findByUsername(postWriteDTO.getWriter());
+        post.writePost(postWriteDTO,member);
         postService.save(post);
         return ResponseEntity.status(HttpStatus.CREATED).body(post.getId());
     }

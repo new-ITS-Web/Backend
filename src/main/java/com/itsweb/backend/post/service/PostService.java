@@ -3,6 +3,7 @@ package com.itsweb.backend.post.service;
 import com.itsweb.backend.member.Member;
 import com.itsweb.backend.member.MemberRepository;
 import com.itsweb.backend.post.domain.Post;
+import com.itsweb.backend.post.dto.PostAllResponseDTO;
 import com.itsweb.backend.post.dto.PostResponseDTO;
 import com.itsweb.backend.post.domain.LikeEntity;
 import com.itsweb.backend.post.repository.LikeRepository;
@@ -24,11 +25,11 @@ public class PostService {
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
     private final LikeRepository likeRepository;
-    public List<PostResponseDTO> findAllPost(){
+    public List<PostAllResponseDTO> findAllPost(){
         List<Post> all = postRepository.findAll();
-        List<PostResponseDTO> dto = new ArrayList<>();
+        List<PostAllResponseDTO> dto = new ArrayList<>();
         for (Post post : all) {
-            PostResponseDTO tmp = new PostResponseDTO(post);
+            PostAllResponseDTO tmp = new PostAllResponseDTO(post);
             dto.add(tmp);
         }
         return dto;
