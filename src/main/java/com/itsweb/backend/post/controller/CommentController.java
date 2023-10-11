@@ -5,7 +5,6 @@ import com.itsweb.backend.post.dto.CommentResponseDTO;
 import com.itsweb.backend.post.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +29,8 @@ public class CommentController {
     }
 
     // 댓글 삭제
-    @DeleteMapping("/post/{postId}/comment")
-    public void removeComment(@PathVariable("postId") Long postId){
-
-    }
+//    @DeleteMapping("/post/{postId}/comment")
+//    public void removeComment(@PathVariable("postId") Long postId,){
+//
+//    }
 }

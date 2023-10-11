@@ -29,7 +29,7 @@ public class Post extends TimeStamp {
     @Column(nullable = false)
     private String content;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<LikeEntity> likeEntity = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
@@ -42,9 +42,10 @@ public class Post extends TimeStamp {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public void writePost(PostWriteDTO postWriteDTO){
+    public void writePost(PostWriteDTO postWriteDTO,Member member){
         this.title = postWriteDTO.getTitle();
         this.content = postWriteDTO.getContent();
+        this.member = member;
     }
     public void updatePost(PostEditDTO postEditDTO){
         this.title = postEditDTO.getTitle();
