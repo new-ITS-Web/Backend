@@ -25,7 +25,7 @@ public class LoginController {
         MemberVO memberVO = new MemberVO(loginMember.getUserId(), loginMember.getUsername());
 
         HttpSession session = request.getSession();
-        session.setAttribute("loginMember", memberVO);
+        session.setAttribute(SessionConst.LOGIN_MEMBER, memberVO);
         return ResponseEntity.ok().body("로그인");
     }
 
@@ -40,7 +40,7 @@ public class LoginController {
     }
 
     @GetMapping("/mypage")
-    public ResponseEntity<String> myPage(@SessionAttribute(name = "loginMember", required = false) MemberVO loginMember) {
+    public ResponseEntity<String> myPage(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) MemberVO loginMember) {
         if (loginMember == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("로그인이 필요합니다");
         }
