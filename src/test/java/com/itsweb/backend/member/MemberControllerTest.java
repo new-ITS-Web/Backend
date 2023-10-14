@@ -1,5 +1,7 @@
 package com.itsweb.backend.member;
 
+import com.itsweb.backend.member.domain.Member;
+import com.itsweb.backend.member.service.MemberService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +14,8 @@ import static org.assertj.core.api.Assertions.*;
 @SpringBootTest
 @Transactional
 class MemberControllerTest {
-    @Autowired MemberService memberService;
+    @Autowired
+    MemberService memberService;
     @Autowired PasswordEncoder passwordEncoder;
 
     @Test

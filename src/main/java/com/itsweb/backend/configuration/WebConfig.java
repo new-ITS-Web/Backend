@@ -1,6 +1,6 @@
 package com.itsweb.backend.configuration;
 
-import com.itsweb.backend.member.LoginCheckInterceptor;
+import com.itsweb.backend.member.interceptor.LoginCheckInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
