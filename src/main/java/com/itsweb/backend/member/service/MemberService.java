@@ -1,5 +1,6 @@
 package com.itsweb.backend.member.service;
 
+import com.itsweb.backend.member.controller.MemberDTO;
 import com.itsweb.backend.member.domain.Member;
 import com.itsweb.backend.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,12 @@ public class MemberService {
             return null;
         }
         return findMember;
+    }
+
+    public Member encodePassword(MemberDTO memberDTO) {
+        String encodedPassword = passwordEncoder.encode(memberDTO.getPassword());
+        Member member = new Member(memberDTO.getUserId(), memberDTO.getUsername(), encodedPassword);
+        return member;
     }
 
     @Transactional
