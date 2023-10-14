@@ -1,4 +1,4 @@
-package com.itsweb.backend.member;
+package com.itsweb.backend.member.controller;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

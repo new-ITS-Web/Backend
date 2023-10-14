@@ -1,4 +1,4 @@
-package com.itsweb.backend.member;
+package com.itsweb.backend.member.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
-public class MemberVO implements Serializable{
+public class SessionMemberDTO implements Serializable{
     private String userId;
     private String username;
     @Serial

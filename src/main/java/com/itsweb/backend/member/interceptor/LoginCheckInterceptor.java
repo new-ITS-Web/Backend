@@ -1,5 +1,6 @@
-package com.itsweb.backend.member;
+package com.itsweb.backend.member.interceptor;
 
+import com.itsweb.backend.member.SessionConst;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

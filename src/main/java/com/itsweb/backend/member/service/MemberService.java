@@ -1,5 +1,7 @@
-package com.itsweb.backend.member;
+package com.itsweb.backend.member.service;
 
+import com.itsweb.backend.member.domain.Member;
+import com.itsweb.backend.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
