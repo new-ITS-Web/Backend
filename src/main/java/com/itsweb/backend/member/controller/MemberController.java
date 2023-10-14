@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,12 +19,10 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
     private final MemberService memberService;
-    private final PasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping("/join")
     public ResponseEntity<?> join(@Valid @RequestBody MemberDTO memberDTO) {
-        Member member = new Member();
-        member.signUp(memberDTO.getUserId(), memberDTO.getUsername(), memberDTO.getPassword(),bCryptPasswordEncoder);
+        Member member = memberService.encodePassword(memberDTO);
         return memberService.join(member);
     }
 

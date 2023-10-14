@@ -1,16 +1,14 @@
 package com.itsweb.backend.member.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Getter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 public class Member {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
@@ -23,10 +21,9 @@ public class Member {
 
     private String password;
 
-    public void signUp(String userId, String username, String password, PasswordEncoder passwordEncoder) {
+    public Member(String userId, String username, String password) {
         this.userId = userId;
-        this.password = passwordEncoder.encode(password);
         this.username = username;
+        this.password = password;
     }
-
 }
